@@ -18,10 +18,11 @@ module.exports = class extends Client {
             throw new Error('__dirname missing in config !');
         this.Collection = Collection;
         this.functions = require('../utils/functions');
-        config = Object.assign(this.defaults.defaultOptions, config);
+        config = Object.assign(defaults.defaultOptions, config);
         config.owners = [...defaults.defaultOptions.owners, ...config.owners]
         config.owners =  [...new Set(config.owners)]
-        this.login(this.config.token).catch((e) => {
+        this.config = config
+        this.login(config.token).catch((e) => {
             console.log(e)
         });
         this.database = new OFADatabase(this);

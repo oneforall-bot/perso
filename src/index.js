@@ -1,2 +1,2 @@
-const FTSecurity = require('./structures/FTSecurity');
-module.exports = (config) => new FTSecurity(config);
+const OneForAll = require('./structures/OneForAll');
+module.exports = (config) => new OneForAll(config);

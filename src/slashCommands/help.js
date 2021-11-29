@@ -1,4 +1,5 @@
 const {MessageActionRow, MessageButton} = require("discord.js");
+const path = require("path/posix");
 module.exports = {
     data: {
         name: 'help',
@@ -49,11 +50,11 @@ module.exports = {
             await interaction.editReply({embeds: [embed]})
 
         } else {
-            const commandFolder = oneforall._fs.readdirSync('./src/slashCommands/').filter(file => !file.endsWith('.js'))
+            const commandFolder = oneforall._fs.readdirSync(path.resolve(__dirname, "..", "slashCommands")).filter(file => !file.endsWith('.js'))
             embed.fields = commandFolder.map(folder => {
                 return {
                     name: folder.toUpperCase(),
-                    value: '> ' + oneforall._fs.readdirSync(`./src/slashCommands/${folder}`).map(file => `\`${file.split('/').pop().split('.')[0]}\``).join(', ')
+                    value: '> ' + oneforall._fs.readdirSync(path.resolve(__dirname, "..", "slashCommands", folder)).map(file => `\`${file.split('/').pop().split('.')[0]}\``).join(', ')
                 }
             })
             await interaction.editReply({embeds: [embed]})

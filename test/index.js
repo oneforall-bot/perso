@@ -1,4 +1,4 @@
-require('ft-security')({
+require('oneforall-perso')({
     licenceKey: `dd`,
     token: `ODY0NTI2MzkwMTc0OTQxMTg0.YO2u8Q.Nq7_N_7avkKn4CRiK9irGzNP80k`,
     prefix: `.`,
