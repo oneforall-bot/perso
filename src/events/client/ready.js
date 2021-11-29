@@ -1,17 +1,18 @@
 const checkSoutien = require('../../utils/check/soutien')
 const checkMute = require('../../utils/check/mute')
+const checkCounter = require('../../utils/check/counter')
 const GiveawaysManager = require("../../utils/Giveaway/Manager");
-module.exports = async (ftSecurity) => {
-    console.log(`FTSecurity is ready`);
-    await checkSoutien(ftSecurity)
-    await checkMute(ftSecurity)
-    console.log(ftSecurity.user.username)
-    ftSecurity.giveawaysManager = new GiveawaysManager(ftSecurity, {
+module.exports = async (oneforall) => {
+    console.log(`${oneforall.user.username} is ready`);
+    await checkSoutien(oneforall)
+    await checkMute(oneforall)
+    await checkCounter(oneforall)
+    oneforall.giveawaysManager = new GiveawaysManager(oneforall, {
         updateCountdownEvery: 5000,
         hasGuildMembersIntent: true,
         default: {
             botsCanWin: false,
-            // exemptPermissions: ['MANAGE_MESSAGES', 'ADMINISTRATOR'],
+            exemptPermissions: ['MANAGE_MESSAGES', 'ADMINISTRATOR'],
             embedColor: "#36393F",
             embedColorEnd: "#36393F",
             reaction: '🎉',
