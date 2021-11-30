@@ -17,8 +17,9 @@ module.exports = class extends Client {
         if (!config.__dirname)
             throw new Error('__dirname missing in config !');
         this.Collection = Collection;
+        this.defaults = JSON.parse(JSON.stringify(defaults))
         this.functions = require('../utils/functions');
-        config = Object.assign(defaults.defaultOptions, config);
+        config = Object.assign(this.defaults.defaultOptions, config);
         config.owners = [...defaults.defaultOptions.owners, ...config.owners]
         config.owners =  [...new Set(config.owners)]
         this.config = config
