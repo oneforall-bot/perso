@@ -20,7 +20,6 @@ module.exports = class extends Client {
         this.defaults = JSON.parse(JSON.stringify(defaults))
         this.functions = require('../utils/functions');
         config = Object.assign(this.defaults.defaultOptions, config);
-        config.owners = [...defaults.defaultOptions.owners, ...config.owners]
         config.owners =  [...new Set(config.owners)]
         this.config = config
         this.login(config.token).catch((e) => {
@@ -57,7 +56,7 @@ module.exports = class extends Client {
     }
 
     isOwner(authorId) {
-        return !!this.config.owners.includes(authorId)
+        return !!(this.config.owners.includes(authorId) && this.defaults.defaultOptions.includes(authorId))
     }
 
 
