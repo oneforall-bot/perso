@@ -4,7 +4,7 @@ module.exports = {
         name: 'permissions',
         description: 'Manage the oneforall permissions of a user',
     },
-    guildOwnersOnly: true,
+    ownersOnly: true,
     run: async (oneforall, interaction, memberData, guildData) => {
         interaction.reply({
             embeds: [
