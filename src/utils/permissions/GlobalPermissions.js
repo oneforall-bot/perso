@@ -1,7 +1,6 @@
 const MemberPermissions = require('./MemberPermissions');
 const GroupPermissions = require('./GroupPermissions');
 const Permissions = require('./Permissions');
-const RolePermissions = require('./RolePermissions');
 class GlobalPermission {
     constructor(oneforall, guildId, memberId, memberData, guildData, roleData) {
         this.oneforall = oneforall;
@@ -31,15 +30,9 @@ class GlobalPermission {
         return new MemberPermissions(this.oneforall, this.guildId, this.memberId);
     }
 
-    getRolePermissionManager() {
-        return new RolePermissions(this.oneforall, this.guildId, this.memberData)
-    }
-
     list() {
         const permissions = [];
         permissions.push(...this.memberData.permissions.filter(p => !permissions.includes(p)));
-        // const memberRolesHas = guildRoles.filter(async role => (await this.oneforall.guilds.cache.get(this.guildId).members.fetch(this.memberId).catch(() => {}))?.roles.cache.has(role.roleId))
-        // console.log(memberRolesHas)
         if(!this.roleData){
             this.oneforall.managers.rolesManager.forEach(async roleManager => {
                 const member = this.oneforall.guilds.cache.get(this.guildId).members.cache.get(this.memberId)
