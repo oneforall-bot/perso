@@ -1,4 +1,5 @@
 module.exports = async (oneforall, role) => {
+   if(role.managed) return;
     const guildData = oneforall.managers.guildsManager.getAndCreateIfNotExists(role.guild.id, {
         guildId: role.guild.id
     })
