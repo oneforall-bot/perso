@@ -2,7 +2,7 @@ module.exports = async (oneforall, member, channel) => {
     const guildData = oneforall.managers.guildsManager.getAndCreateIfNotExists(member.guild.id, {
         guildId: member.guild.id
     })
-    if(!member.guild.me?.permissions.has("MANAGE_CHANNELS")) return
+    if(!member.guild.me?.permissions.has("MANAGE_CHANNELS", true)) return
     const {tempvoc} = guildData
     console.log(tempvoc)
     if (!tempvoc.channel || !tempvoc.enable || !tempvoc.category) return
