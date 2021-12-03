@@ -12,7 +12,7 @@ module.exports = async (oneforall, member) => {
     const lang = oneforall.handlers.langHandler.get(guildData.lang)
     const cachedInv= oneforall.cachedInv.get(guild.id);
     const newInv = await guild.invites.fetch()
-    cachedInv.set(guild.id, newInv)
+    oneforall.cachedInv.set(guild.id, newInv)
     const usedInv = newInv.find(inv => cachedInv.get(inv.code) < inv.uses);
     let finalMsg;
     if (!usedInv) {
