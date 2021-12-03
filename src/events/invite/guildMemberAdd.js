@@ -12,10 +12,11 @@ module.exports = async (oneforall, member) => {
     const lang = oneforall.handlers.langHandler.get(guildData.lang)
     const cachedInv= oneforall.cachedInv.get(guild.id);
     const newInv = await guild.invites.fetch()
-    const usedInv = newInv.find(inv => cachedInv.get(inv.code) < inv.uses);
     cachedInv.set(guild.id, newInv)
-    let finalMsg = lang.invite.cantTrace(member.toString());
+    const usedInv = newInv.find(inv => cachedInv.get(inv.code) < inv.uses);
+    let finalMsg;
     if (!usedInv) {
+        lang.invite.cantTrace(member.toString());
         if (guild.vanityURLCode) finalMsg = lang.invite.vanity(member.toString())
         if (member.user.bot) finalMsg = lang.invite.oauth(member.toString())
     } else {
