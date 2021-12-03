@@ -10,10 +10,10 @@ module.exports = async (oneforall, member) => {
     if (!channel || !message || !enable) return
     const welcomeChannel = guild.channels.cache.get(channel)
     const lang = oneforall.handlers.langHandler.get(guildData.lang)
-    const {cachedInv} = oneforall;
+    const cachedInv= oneforall.get(guild.id);
     const newInv = await guild.invites.fetch()
     const usedInv = newInv.find(inv => cachedInv.get(inv.code) < inv.uses);
-    for (const [code, invite] of newInv) cachedInv.set(code, invite.uses)
+    cachedInv.set(guild.id, newInv)
     let finalMsg = lang.invite.cantTrace(member.toString());
     if (!usedInv) {
         if (guild.vanityURLCode) finalMsg = lang.invite.vanity(member.toString())
