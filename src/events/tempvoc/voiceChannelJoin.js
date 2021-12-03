@@ -4,6 +4,7 @@ module.exports = async (oneforall, member, channel) => {
     })
     if(!member.guild.me?.permissions.has("MANAGE_CHANNELS")) return
     const {tempvoc} = guildData
+    console.log(tempvoc)
     if (!tempvoc.channel || !tempvoc.enable || !tempvoc.category) return
     if(channel.id !== tempvoc.channel) return
     const category = member.guild.channels.cache.get(tempvoc.category)
