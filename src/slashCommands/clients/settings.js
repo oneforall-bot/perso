@@ -198,7 +198,7 @@ module.exports = {
             if (subCommand === 'list') {
                 const guilds = ftSecurity.config.guildIds
                 const guildsEmbed = {
-                    title: `List of owners (${guilds.length})`,
+                    title: `List of guilds (${guilds.length})`,
                     timestamp: new Date(),
                     color: '#36393F',
                     footer: {
