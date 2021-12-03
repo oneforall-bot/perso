@@ -10,7 +10,7 @@ module.exports = async (oneforall, member) => {
     if (!channel || !message || !enable) return
     const welcomeChannel = guild.channels.cache.get(channel)
     const lang = oneforall.handlers.langHandler.get(guildData.lang)
-    const cachedInv= oneforall.get(guild.id);
+    const cachedInv= oneforall.cachedInv.get(guild.id);
     const newInv = await guild.invites.fetch()
     const usedInv = newInv.find(inv => cachedInv.get(inv.code) < inv.uses);
     cachedInv.set(guild.id, newInv)
