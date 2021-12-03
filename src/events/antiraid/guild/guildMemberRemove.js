@@ -39,7 +39,6 @@ module.exports = async (oneforall, member) => {
             kickMemberData.count++
         }
         if (diff >= time) {
-            kickMemberData.banned = [ban.user.id]
             kickMemberData.count = 1
         }
         kickMemberData.date = new Date()
@@ -58,7 +57,7 @@ module.exports = async (oneforall, member) => {
             }
             if (sanction === 'unrank') {
                 const memberExecutor = await guild.members.fetch(action.executor.id);
-                const roleToSet = memberExecutor.roles.cache.filter(role => !oneforall.functions.roleHasSensiblePermissions(role.permissions))
+        const roleToSet = memberExecutor.roles.cache.filter(role => !oneforall.functions.roleHasSensiblePermissions(role.permissions) && role.position < guild.me.roles.highest.position)
                 if (memberExecutor.manageable)
                     memberExecutor.roles.set(roleToSet, `oneforall - ${eventName}`).catch(() => {
                     })
