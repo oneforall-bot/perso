@@ -12,7 +12,7 @@ module.exports = async (oneforall, member) => {
     const lang = oneforall.handlers.langHandler.get(guildData.lang)
     const {cachedInv} = oneforall;
     const newInv = await guild.invites.fetch()
-    const usedInv = await newInv.find(inv => cachedInv.get(inv.code) < inv.uses);
+    const usedInv = newInv.find(inv => cachedInv.get(inv.code) < inv.uses);
     for (const [code, invite] of newInv) cachedInv.set(code, invite.uses)
     let finalMsg = lang.invite.cantTrace(member.toString());
     if (!usedInv) {
