@@ -15,8 +15,7 @@ class GlobalPermission {
     }
 
     has(permission) {
-        return this.list().includes('ALL')
-        s || this.oneforall.config.owners.includes(this.memberId) || this.list().includes(permission);
+        return this.list().includes('ALL') || this.oneforall.config.owners.includes(this.memberId) || this.list().includes(permission);
 
     }
 
