@@ -13,10 +13,13 @@ module.exports = async (oneforall, member) => {
     const cachedInv= oneforall.cachedInv.get(guild.id);
     const newInv = await guild.invites.fetch()
     oneforall.cachedInv.set(guild.id, newInv)
-    const usedInv = newInv.find(inv => cachedInv.get(inv.code).uses < inv.uses);
-    let finalMsg;
+    const usedInv = newInv.find(inv => {
+        const i = cachedInv.get(inv.code)
+        if(!i) return
+        return i
+    });
+    let finalMsg = lang.invite.cantTrace(member.toString());
     if (!usedInv) {
-        lang.invite.cantTrace(member.toString());
         if (guild.vanityURLCode) finalMsg = lang.invite.vanity(member.toString())
         if (member.user.bot) finalMsg = lang.invite.oauth(member.toString())
     } else {
