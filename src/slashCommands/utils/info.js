@@ -6,16 +6,15 @@ const ms = require("ms");
 const os = require("os");
 
 
-
 module.exports = {
     data: {
         name: 'info',
         description: 'Get information about a user, the guild or a role',
         options: [
             {
-              name: 'bot',
-              type: 'SUB_COMMAND',
-              description: 'Get information about the bot',
+                name: 'bot',
+                type: 'SUB_COMMAND',
+                description: 'Get information about the bot',
             },
             {
                 name: 'user',
@@ -108,7 +107,7 @@ module.exports = {
             color: '#36393F',
             fields: []
         }]
-        if(subCommand === 'bot'){
+        if (subCommand === 'bot') {
             const takefy = await oneforall.users.fetch("708047733994553344")
             embeds[0].title = 'Bot info'
             embeds[0].fields = [
@@ -464,8 +463,8 @@ module.exports = {
                 },
                 {
                     name: 'Permissions:',
-                    value: role.permissions.toArray().join(', ') || 'No permissions',
-                    inline: true
+                    value: role.permissions.toArray().map(perm => `\`${perm}\``).join(', ') || 'No permissions',
+                    inline: false
                 }
             ]
             if (role.tags) embeds[0].fields.push({
