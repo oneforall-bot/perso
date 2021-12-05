@@ -5,8 +5,12 @@ const GiveawaysManager = require("../../utils/Giveaway/Manager");
 module.exports = async (oneforall) => {
     await oneforall.functions.sleep(500)
     console.log(`${oneforall.user.username} is ready`);
-    for await(const guild of oneforall.guilds.cache.filter(guild => guild.me?.permissions.has('MANAGE_GUILD', true)).values()){
-        oneforall.cachedInv.set(guild.id, (await guild.invites.fetch()))
+    for await(const guild of oneforall.guilds.cache.filter(guild => guild.me?.permissions.has('MANAGE_GUILD', true)).values()) {
+        const guildInv = await guild.invites.fetch()
+        const tempMap = new oneforall.Collection()
+        for (const [code, invite] of guildInv) tempMap.set(code, invite.uses)
+        oneforall.cachedInv.set(guild.id, tempMap)
+
     }
     await checkSoutien(oneforall)
     await checkMute(oneforall)
