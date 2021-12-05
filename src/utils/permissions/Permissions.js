@@ -13,6 +13,11 @@ class Permissions {
                 label: langManager.permissions["GROUP_NEW_CMD"].label,
                 description: langManager.permissions["GROUP_NEW_CMD"].description
             },
+            INFO_CMD: {
+                emoji: ``,
+                label: langManager.permissions["INFO_CMD"].label,
+                description: langManager.permissions["INFO_CMD"].description
+            },
             BLACKLIST_CMD: {
                 emoji: ``,
                 label: langManager.permissions["BLACKLIST_CMD"].label,
