@@ -11,7 +11,8 @@ module.exports = {
         botRemoved: (guild, member, owner) => `Votre bot a été enlevé de ${guild} (${member} membres) ${owner.toString()} (${owner.id}}`,
         managedRole: `Ce rôle ne peut pas être ajouté car c'est un rôle **géré par une application**`,
         pingOneforall: `Mon prefix est \`/\`\n **Si vous ne voyez aucune commandes écrivez quelque message**`,
-
+        yes: 'Oui',
+        no: 'Non',
         tryToPermsRole: `Vous ne pouvez pas ajouter un role ayant des permissions sensible`,
         noSetup: 'Vous devez setup le bot pour utiliser cette commande',
         undefined: 'Non définie',
