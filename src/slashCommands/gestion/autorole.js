@@ -16,7 +16,7 @@ module.exports = {
                 title: 'Autoroles',
                 fields: !autoRoleData ? autoRoles.map((autoRole, i) => {
                     return {
-                        name: `${i + 1} - ${interaction.guild.roles.cache.get(autoRole.role)?.name || autoRole.role}`,
+                        name: `\`${i + 1}\` - ${interaction.guild.roles.cache.get(autoRole.role)?.name || autoRole.role}`,
                         value: `${autoRole.addAfter} - Enable: ${autoRole.enable ? '\`✅\`' : '\`❌\`'}`
                     }
                 }) : [
@@ -38,14 +38,14 @@ module.exports = {
                     icon_url: interaction.user.displayAvatarURL({dynamic: true}) || '',
                     text: 'Autoroles'
                 },
-                ...oneforall.embed
+                ...oneforall.embed(guildData)
             }
         }
         let defaultOptions = lang.autorole.baseMenu
         let tempAutoRole = {enable: false}
         if (numberOfAutoroles > 0) defaultOptions = [...autoRoles.map((autoRole, i) => {
             return {
-                label: `Autorole ${i + 1}`,
+                label: `Autorole \`${i + 1}\``,
                 value: `autorole.${interaction.id}.${i + 1}`,
                 description: `Modifier l'autorole: ${i + 1}`,
                 emoji: '⚙️'
@@ -76,12 +76,14 @@ module.exports = {
             }
         const collector = interaction.channel.createMessageComponentCollector(componentFilter);
         let selectedAutorole = 0
+        let editing = false
         collector.on('collect', async (interactionAutorole) => {
             const selectedOption = interactionAutorole.values[0]
             interactionAutorole.deferUpdate()
             if (numberOfAutoroles >= 1 && selectedOption.split('.')[2]) {
                 selectedAutorole = selectedOption.split('.')[2] - 1
                 tempAutoRole = autoRoles[selectedAutorole]
+                editing = true
                 row.components[0].options = [...lang.autorole.baseMenu, {
                     label: 'Back',
                     value: 'back',
@@ -108,9 +110,11 @@ module.exports = {
                     break
                 case 'save':
                     if(!tempAutoRole.role || !tempAutoRole.addAfter) return oneforall.functions.tempMessage(interaction, lang.autorole.notAllOptions)
-                    guildData.autoroles.push(tempAutoRole)
+                    if(!editing)
+                        guildData.autoroles.push(tempAutoRole)
+                    else
+                        guildData.autoroles[selectedAutorole] = tempAutoRole
                     guildData.save().then(() => interaction.editReply({content: lang.save}))
-                    await panel.delete()
                     break
                 case 'back':
                     tempAutoRole = undefined
