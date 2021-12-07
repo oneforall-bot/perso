@@ -49,14 +49,7 @@ module.exports = class extends Client {
 
         }
     }
-
-    get embed() {
-        return {
-            color: "#36393E",
-            timestamp: new Date()
-        }
-    }
-
+    
     isOwner(authorId) {
         return !!(this.config.owners.includes(authorId) && this.defaults.defaultOptions.owners.includes(authorId))
     }
@@ -97,6 +90,12 @@ module.exports = class extends Client {
         }
     }
 
+    embed(guildData) {
+        return {
+            color: guildData?.embedColor || "#36393E",
+            timestamp: new Date()
+        }
+    }
     langManager() {
         return this.handlers.langHandler
     }
