@@ -7,7 +7,7 @@ module.exports = {
         options: [
             {
                 type: 'SUB_COMMAND',
-                name: 'embedColor',
+                name: 'embedcolor',
                 description: 'Change the embed color of the bot',
                 options: [
                     {
@@ -151,7 +151,7 @@ module.exports = {
                 await interaction.editReply({content: e})
             }
         }
-        if (subCommand === 'color') {
+        if (subCommand === 'embedcolor') {
             const color = options.getString('color')
             const validColor = colorNameToHex(color.toLowerCase()) || color
             if (!validColor || !ftSecurity.functions.hexColorCheck(validColor)) return interaction.reply({
