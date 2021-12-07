@@ -1,8 +1,23 @@
+const colorNameToHex = require("colornames");
+
 module.exports = {
     data: {
         name: 'set',
         description: 'Change visual settings of the bot',
         options: [
+            {
+                type: 'SUB_COMMAND',
+                name: 'embedColor',
+                description: 'Change the embed color of the bot',
+                options: [
+                    {
+                        type: 'STRING',
+                        name: 'color',
+                        description: 'The color of the bot',
+                        required: true
+                    }
+                ]
+            },
             {
                 type: 'SUB_COMMAND',
                 name: 'name',
@@ -109,7 +124,6 @@ module.exports = {
         }
         if (subCommand === 'activity') {
             const type = options.get('type').value.toUpperCase()
-            console.log(type)
             try {
 
                 await ftSecurity.user.setPresence({
@@ -137,5 +151,20 @@ module.exports = {
                 await interaction.editReply({content: e})
             }
         }
+        if (subCommand === 'color') {
+            const color = options.getString('color')
+            const validColor = colorNameToHex(color.toLowerCase()) || color
+            if (!validColor || !ftSecurity.functions.hexColorCheck(validColor)) return interaction.reply({
+                content: guildData.langManager.set.color.notValid(color),
+                ephemeral: true
+            })
+            guildData.embedColor = validColor
+            guildData.save().then(() => {
+                interaction.reply({embeds: [guildData.langManager.set.color.success(validColor)]})
+            })
+
+
+        }
+
     }
 }
