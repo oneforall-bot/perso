@@ -154,7 +154,7 @@ module.exports = {
                     }
                 ],
                 timestamp: new Date(),
-                color: "#36393E",
+                color: guildData.embedColor,
                 footer: {
                     text: oneforall.user.username
                 }

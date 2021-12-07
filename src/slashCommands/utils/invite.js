@@ -106,7 +106,7 @@ module.exports = {
                         value: invites.enable ? '\`✅\`' : '\`❌\`'
                     },
                 ],
-                ...oneforall.embed,
+                ...oneforall.embed(guildData),
                 timestamp: new Date()
             }
             const panel = await interaction.editReply({
@@ -244,7 +244,7 @@ module.exports = {
                 })
             }
             const {invites} = memberData
-            interaction.editReply({embeds: [lang.invite.show(user, invites)]})
+            interaction.editReply({embeds: [lang.invite.show(user, invites, oneforall.functions.getTotalInvite(invites))]})
         }
     }
 }
