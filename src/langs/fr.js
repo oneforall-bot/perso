@@ -202,6 +202,10 @@ module.exports = {
             PICONLY_CMD: {
                 label: "Permet d'utiliser le piconly",
                 description: "Permet de définir un salon en piconly"
+            },
+            POLL_CMD: {
+                label: "Permet d'utiliser la commande poll",
+                description: "Permet de créer, supprimer des poll"
             }
         },
         piconly: {
@@ -260,6 +264,17 @@ module.exports = {
             success: (subCommand) => `Le salon est ${subCommand === 'on' ? 'fermé' : 'ouvert'}`,
             all: {
                 success: (subCommand) => `Les salons sont ${subCommand === 'on' ? 'fermés' : 'ouverts'}`,
+            }
+        },
+        set: {
+            color: {
+                notValid: color =>  `${color} n'est pas une couleur valide`,
+                success: color => {
+                    return {
+                        description: 'Voici la nouvelle couleur',
+                        color
+                    }
+                }
             }
         },
         counter: {
@@ -428,11 +443,11 @@ module.exports = {
             muteRoleEveryone: `Vous ne mettre le role everyone en mute role`
         },
         vc: {
-            msg: (count, muteCount, streamingCount, muteHeadSetCount, openMicCount) => `🗣️ Statistique vocal :
-        > 📢 Micro ouvert : **${openMicCount}**
-        > 📹 En Stream : **${streamingCount}**
-        > 🎧 Mute casque : **${muteHeadSetCount}**
-        > 🔇 Mute micro : **${muteCount}**\n\n> Total de personnes en vocal : **${count}**`
+            msg: (count, muteCount, streamingCount, muteHeadSetCount, openMicCount) => `<:stats:783422345284943883> Statistique vocal :
+        > <:unmute:801122798629945354> Micro ouvert : **${openMicCount}**
+        > <:stream:801122725602000946> En Stream : **${streamingCount}**
+        > <:mutecasque:801123005287628890> Mute casque : **${muteHeadSetCount}**
+        > <:mutemic:801122908445212723> Mute micro : **${muteCount}**\n\n> Total de personnes en vocal : **${count}**`
         },
         clear: {
             success: deleteAmount => ` Vous avez supprimé ${deleteAmount} messages.`
@@ -1102,7 +1117,26 @@ module.exports = {
                             color: '#36393E'
                         }
                     },
-
+                    mention: (executor, channel, mention) => {
+                        return {
+                            description: `${executor.toString()} a posté trop de mention dans ${channel}\n\nContent: ${mention}`,
+                            fields: [
+                                {
+                                    name: 'ID:',
+                                    value: `\`\`\`js\nExecutor = ${executor.id}\nChannel = ${channel.id}\`\`\``
+                                }
+                            ],
+                            author: {
+                                name: `${executor.user.username}#${executor.user.discriminator}`,
+                                icon_url: executor.user.displayAvatarURL({dynamic: true})
+                            },
+                            timestamp: new Date(),
+                            footer: {
+                                text: '🕙'
+                            },
+                            color: '#36393E'
+                        }
+                    },
                     delete: (executor, target, channel, content) => {
                         return {
                             description: `${executor.toString()} a supprimé ${target ? `le message de ${target.toString()}` : `son propre message`} dans ${channel}\n\nContent: ${content}`,

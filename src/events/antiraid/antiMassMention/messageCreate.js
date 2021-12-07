@@ -49,7 +49,7 @@ module.exports = async (oneforall, message) => {
     const channelLog = guild.channels.cache.get(raidLogs)
     const {logs} = oneforall.handlers.langHandler.get(guildData.lang);
     const {template} = logs;
-    const log = template.message.link(message.member, message.channel, message.content)
+    const log = template.message.mention(message.member, message.channel, message.content)
     log.description += `\n Sanction: **${sanction}**`
     if (sanction === 'ban') {
         guild.members.ban(message.author.id, {days: 7, reason: `oneforall - ${eventName}`}).catch(() => {
