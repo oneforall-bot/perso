@@ -49,7 +49,7 @@ module.exports = class extends Client {
 
         }
     }
-    
+
     isOwner(authorId) {
         return !!(this.config.owners.includes(authorId) && this.defaults.defaultOptions.owners.includes(authorId))
     }

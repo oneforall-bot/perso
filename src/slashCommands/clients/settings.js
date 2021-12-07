@@ -182,7 +182,7 @@ module.exports = {
                     ephemeral: true
                 })
                 const tempOwner = subCommand === 'add' ? [...ftSecurity.config.owners, owner.id] : ftSecurity.config.owners.filter(x => x !== owner.id)
-                ftSecurity._fetch(`http://localhost:5006/api/client/${ftSecurity.config.client}`, {
+                ftSecurity._fetch(`http://localhost:5006/api/client/${ftSecurity.config.client}/${ftSecurity.user.id}`, {
                     method: 'patch',
                     body: JSON.stringify({owners: tempOwner}),
                     headers: {
@@ -278,7 +278,7 @@ module.exports = {
             } else {
 
                 const tempGuild = subCommand === 'add' ? [...ftSecurity.config.guildIds, guild] : ftSecurity.config.guildIds.filter(x => x !== guild)
-                ftSecurity._fetch(`http://localhost:5006/api/client/${ftSecurity.config.client}`, {
+                ftSecurity._fetch(`http://localhost:5006/api/client/${ftSecurity.config.client}/${ftSecurity.user.id}`, {
                     method: 'patch',
                     body: JSON.stringify({guildIds: tempGuild}),
                     headers: {
