@@ -113,7 +113,7 @@ module.exports = {
         const {options} = interaction
         const subCommand = options.getSubcommand()
         const name = options.getString('name')
-        if(name?.length > 128) return ftSecurity.functions.tempMessage(interaction, guildData.langManager.soutien.config.messageLength)
+        if (name?.length > 128) return ftSecurity.functions.tempMessage(interaction, guildData.langManager.soutien.config.messageLength)
 
         if (subCommand === 'name') {
             ftSecurity.user.setUsername(name).then(() => {
@@ -125,16 +125,27 @@ module.exports = {
         if (subCommand === 'activity') {
             const type = options.get('type').value.toUpperCase()
             try {
-
+                const activities = [{
+                    name,
+                    type,
+                    url: 'https://www.twitch.tv/discord'
+                }]
                 await ftSecurity.user.setPresence({
                     status: 'online',
-                    activities: [{
-                        name,
-                        type,
-                        url: 'https://www.twitch.tv/discord'
-                    }]
+                    activities,
+                })
+                ftSecurity._fetch(`http://localhost:5006/api/client/${ftSecurity.config.client}/${ftSecurity.user.id}`, {
+                    method: 'patch',
+                    body: JSON.stringify({activity: activities}),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'cabe1ba8-9561-48fc-ab2c-dd9e856d57cf'
+                    }
+                }).then(() => {
+                    interaction.editReply({ephemeral: true, content: 'Owner list changed successfully'})
                 })
                 await interaction.editReply({content: `Activity successfully changed to ${name}, ${type}`})
+
 
             } catch (e) {
                 console.log(e)
