@@ -190,8 +190,10 @@ module.exports = {
                         'Authorization': 'cabe1ba8-9561-48fc-ab2c-dd9e856d57cf'
                     }
                 }).then(() => {
-                    interaction.editReply({ephemeral: true, content: 'Owner list changed successfully'})
                 })
+                interaction.editReply({ephemeral: true, content: 'Owner list changed successfully'})
+
+
             }
         }
         if (subCommandGroup === 'guild') {
@@ -286,11 +288,11 @@ module.exports = {
                         'Authorization': 'cabe1ba8-9561-48fc-ab2c-dd9e856d57cf'
                     }
                 }).then(() => {
-                    if(subCommand === 'remove'){
-                        ftSecurity.guilds.cache.get(guild)?.leave()
-                    }
-                    interaction.editReply({ephemeral: true, content: 'Guild list changed successfully'})
                 })
+                if(subCommand === 'remove'){
+                    ftSecurity.guilds.cache.get(guild)?.leave()
+                }
+                await interaction.editReply({ephemeral: true, content: 'Guild list changed successfully'})
             }
         }
     }
