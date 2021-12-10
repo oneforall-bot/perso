@@ -55,7 +55,6 @@ module.exports = class extends Client {
     }
 
     async setCommands(guildId, guildData){
-        if(!this.config.guildIds.includes(guildId))return
         if (!this.slashReloaded.has(guildId)) {
             if (!this.application?.owner) await this.application?.fetch();
             this.slashReloaded.add(guildId);
