@@ -58,7 +58,7 @@ module.exports = {
                 const ownerEmbed = {
                     title: `List of owners (${owners.length})`,
                     timestamp: new Date(),
-                    color: '#36393F',
+                    color: guildData.embedColor,
                     footer: {
                         text: 'Page 1/1',
                         icon_url: interaction.user.displayAvatarURL({dynamic: true}) || ''
