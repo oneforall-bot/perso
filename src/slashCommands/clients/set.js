@@ -165,13 +165,13 @@ module.exports = {
         if (subCommand === 'embedcolor') {
             const color = options.getString('color')
             const validColor = colorNameToHex(color.toLowerCase()) || color
-            if (!validColor || !ftSecurity.functions.hexColorCheck(validColor)) return interaction.reply({
+            if (!validColor || !ftSecurity.functions.hexColorCheck(validColor)) return interaction.editReply({
                 content: guildData.langManager.set.color.notValid(color),
                 ephemeral: true
             })
             guildData.embedColor = validColor
             guildData.save().then(() => {
-                interaction.reply({embeds: [guildData.langManager.set.color.success(validColor)]})
+                interaction.editReply({embeds: [guildData.langManager.set.color.success(validColor)]})
             })
 
 
