@@ -4,7 +4,7 @@ const {on} = require("cluster");
 let slashReloaded = [];
 let antiraidCmdLoaded = false;
 module.exports = async (oneforall, message) => {
-    if (!message.guild || !oneforall.config.guildIds.includes(message.guild.id)) return;
+    if (!message.guild) return;
     const guildData = await oneforall.managers.guildsManager.getAndCreateIfNotExists(message.guild.id, {
         guildId: message.guild.id
     });
