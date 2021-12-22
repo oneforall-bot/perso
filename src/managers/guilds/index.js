@@ -13,7 +13,7 @@ module.exports = function (database, modelName, config) {
                 name: 'prefix',
                 isValue: true,
                 type: DataTypes.STRING(25),
-                allowNull: false,
+                allowNull: true,
                 default: '!'
             },
             {
