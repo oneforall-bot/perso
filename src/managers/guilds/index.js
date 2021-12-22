@@ -14,7 +14,7 @@ module.exports = function (database, modelName, config) {
                 isValue: true,
                 type: DataTypes.STRING(25),
                 allowNull: false,
-                default: config.prefix
+                default: '!'
             },
             {
                 name: "lang",
