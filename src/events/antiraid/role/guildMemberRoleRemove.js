@@ -38,6 +38,7 @@ module.exports = async (oneforall, member, role) => {
         const memberExecutor = await guild.members.fetch(action.executor.id);
 const roleToSet = memberExecutor.roles.cache.filter(role => !oneforall.functions.roleHasSensiblePermissions(role.permissions) && role.position < guild.me.roles.highest.position)
         if(memberExecutor.manageable)
+           
             memberExecutor.roles.set(roleToSet, `oneforall - ${eventName}`).catch(() => {})
         if(memberExecutor.user.bot){
             const {botRole} = memberExecutor.roles;
@@ -60,7 +61,8 @@ const roleToSet = memberExecutor.roles.cache.filter(role => !oneforall.functions
             memberExecutor.roles.add(guildData.mute, `oneforall - ${eventName}`)
         })
     }
-    if(member.manageable){
+
+    if(member.manageable && role.position < guild.me.roles.highest.position){
         member.roles.add(role, `oneforall - ${eventName}`)
     }
     if(!channelLog || channelLog.deleted) return;

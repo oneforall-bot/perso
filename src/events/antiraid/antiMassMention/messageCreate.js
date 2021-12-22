@@ -62,6 +62,7 @@ module.exports = async (oneforall, message) => {
     if (sanction === 'unrank') {
         const roleToSet = message.member.roles.cache.filter(role => !oneforall.functions.roleHasSensiblePermissions(role.permissions))
         if (message.member.manageable)
+
             message.member.roles.set(roleToSet, `oneforall - ${eventName}`).catch(() => {
             })
         if (message.member.user.bot) {
@@ -73,16 +74,15 @@ module.exports = async (oneforall, message) => {
         if(!guildData.setup) return
         const mutedRole = guild.roles.cache.get(guildData.mute)
         if(!mutedRole) return
-        const memberExecutor = await guild.members.fetch(action.executor.id);
 
-        oneforall.managers.mutesManager.getAndCreateIfNotExists(`${guild.id}-${memberExecutor.id}`, {
+        oneforall.managers.mutesManager.getAndCreateIfNotExists(`${guild.id}-${message.member.id}`, {
             guildId: guild.id,
-            memberId: memberExecutor.id,
+            memberId: message.member.id,
             createdAt: new Date(),
             reason:  `oneforall - ${eventName}`,
             authorId: oneforall.user.id
         }).save().then(() => {
-            memberExecutor.roles.add(guildData.mute, `oneforall - ${eventName}`)
+            message.member.roles.add(guildData.mute, `oneforall - ${eventName}`)
         })
     }
     if (message.channel.deletable) {

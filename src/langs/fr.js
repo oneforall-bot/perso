@@ -4,13 +4,32 @@ module.exports = {
 
     dictionary: {
         notEnoughPermissions: (command) => `Vous n'avez pas assez de permissions pour exécuter la commande \`${command}\``,
+        notEnoughPermissionsClient: (missingPerms) => `OneForAll manque de permissions (\`${missingPerms}\`) pour pouvoir utiliser cette commande.`,
+        help: {
+            information2: prefix => `<:778353230484471819:780727288903237663> Le préfixe de ce serveur est \`${prefix}\`.\n<:desc2:783422775821729792> Pour obtenir plus d'informations sur une commande, tapez simplement \`${prefix}help\` \`<command>\`.\n<:folder:783422648196923452> Vous pouvez également taper \`${prefix}help commands\` ou réagir avec 📄 pour obtenir toutes mes commandes.`,
+            noCommand: args => `Je ne trouve pas la commande **__${args}__** dans mes commandes`,
+            information: `Information and commands`,
+            noAliases: `Pas d'aliases`,
+            cmdTitle: `Aide sur la commande`,
+            footer: `Demandé par`,
+            titleNoArgs: `Page d'aide général`,
+            command: `Afficher toutes les commandes`,
+            search: `Chercher une aide détaillé sur un commande`,
+            noUsage: `Pas d'usage en particuler`,
+            requiredOrNot: `\`< >\` sont les arguments requis et \`[ ]\` sont les arguments optionnel`
+        },
+        setprefix: {
+            errorNoValid: 'Veuillez utiliser les prefixes suivants: ``!‎``, ``@``, ``#‎``, ``$‎``, ``%‎``, ``^‎``, ``&‎``, ``*‎``, ``(‎``, ``)‎``, ``_‎``, ``+‎``, ``\\‎``, ``-‎``, ``=‎``, ``{‎``, ``}‎``, ``;‎``, ``\'‎``, ``:‎``, ``"‎``, ``|‎``, ``,‎``, ``.‎``, ``<‎``, ``>‎``, ``/‎``, ``?``',
+            success: newPrefix => `\`SUCCÈS\` Le prefix a été mise à jour en **${newPrefix}** `,
+        },
         cooldownMessage: (prefix, command, timeRemaining) => `Vous devez attendre \`${timeRemaining}\` avant de pouvoir exécuter la commande \`${prefix}${command.name}\`.`,
         notOwner: (prefix, command) => `Vous devez être \`Owner\` avant de pouvoir exécuter la commande \`${prefix}${command.name}\`.`,
         notGuildOwner: (prefix, command) => `Vous devez être \`Guild Owner\` avant de pouvoir exécuter la commande \`${prefix}${command.name}\`.`,
+        notCrown: (prefix, command) => `Vous devez être \`la couronne\` avant de pouvoir exécuter la commande \`${prefix}${command.name}\`.`,
         botAdded: (guild, member, owner) => `Votre bot a été ajouté sur ${guild} (${member} membres) ${owner.toString()} (${owner.id}}`,
         botRemoved: (guild, member, owner) => `Votre bot a été enlevé de ${guild} (${member} membres) ${owner.toString()} (${owner.id}}`,
         managedRole: `Ce rôle ne peut pas être ajouté car c'est un rôle **géré par une application**`,
-        pingOneforall: `Mon prefix est \`/\`\n **Si vous ne voyez aucune commandes écrivez quelque message**`,
+        pingOneforall: prefix => `Mon prefix est \`${prefix}\``,
         yes: 'Oui',
         no: 'Non',
         tryToPermsRole: `Vous ne pouvez pas ajouter un role ayant des permissions sensible`,
@@ -23,6 +42,7 @@ module.exports = {
         roleSuppThanClient: `Vous ne pouvez pas utiliser ce rôle car il est supérieur au bot`,
         roleSuppThanAuthor: `Vous ne pouvez effectuer cette action car vos rôles sont inférieure au membre`,
         incorrectTime: 'Le temps est incorrect',
+        incorrectChannel: "Le channel est incorrect",
         save: 'La configuration a été sauvegardé',
         permissions: {
             ALL: {
@@ -208,6 +228,7 @@ module.exports = {
                 description: "Permet de créer, supprimer des poll"
             }
         },
+
         piconly: {
             wrongType: 'Le type du channel est invalide',
             alreadyPiconly: 'Le channel est déjà dans les piconly',
@@ -259,6 +280,15 @@ module.exports = {
             ],
 
 
+        },
+        poll: {
+            missingQuestion: "Vous devez spécifier **une question** pour le vote",
+            success: channel => `Le vote est **lancé** dans ${channel}`,
+            delete: {
+                missingMessageId: "Vous devez spécifier **l'id du message associé au vote**",
+                notFound: "Le vote n'a pas été **trouvé**",
+                success: 'Le vote a été **supprimé**'
+            }
         },
         lock: {
             success: (subCommand) => `Le salon est ${subCommand === 'on' ? 'fermé' : 'ouvert'}`,
@@ -440,6 +470,7 @@ module.exports = {
             noOneToBring: `Il y a personne à déplacer`
         },
         setup: {
+            invalideRoles: `Le role membre ou le role muet est invalide.`,
             muteRoleEveryone: `Vous ne mettre le role everyone en mute role`
         },
         vc: {
@@ -450,7 +481,8 @@ module.exports = {
         > <:mutemic:801122908445212723> Mute micro : **${muteCount}**\n\n> Total de personnes en vocal : **${count}**`
         },
         clear: {
-            success: deleteAmount => ` Vous avez supprimé ${deleteAmount} messages.`
+            success: deleteAmount => ` Vous avez supprimé ${deleteAmount} messages.`,
+            invalidNumber: `Le nombre de message à supprimé est invalide.`
         },
         mute: {
             add: {
@@ -713,6 +745,7 @@ module.exports = {
 
         },
         massrole: {
+            missingRole:  `Veuillez spécifier un rôle`,
             notMembersToEdit: `Il n'y a aucun membres à modifier les **rôles**`,
             success: (role, member, type) => `${member} membre(s)  ${type === 'add' ? 'ont reçu' : 'ont été vue enlevé'} le rôle **${role}**`
         },
@@ -945,7 +978,8 @@ module.exports = {
             }
         },
         renew: {
-            success: (member) => `Le salon a été recréé par ${member}`
+            success: (member) => `Le salon a été recréé par ${member}`,
+            cannotDelete: 'Je ne peux pas **supprimer ce channel**'
         },
         ban: {
             wrongDays: `Les nombres de jours à ban doit être compris entre 0 et 7`,
@@ -992,7 +1026,34 @@ module.exports = {
             }
         },
         antiraid: {
+            wrongSanctionType: `Vous devez choisir une sanction valide \`(mute/unrank/kick/ban)\``,
             config: {
+                configMenu : (enable, limit) => {
+                    return [
+                        {
+                            value: 'enable',
+                            label: !enable ? 'Activer' : 'Désactiver',
+                            emoji: enable ? '❌' : '✅',
+                        },
+                        {
+                            value: 'sanction',
+                            label: 'Sanction',
+                            emoji: '🎯',
+                            question: 'Quel est la sanction ? \`(mute/unrank/kick/ban)\`'
+                        },
+                        ...limit ? [{
+                            value: 'limit',
+                            label: 'Limite',
+                            emoji: '✨',
+                            question: 'Quelle est la limite ?'
+                        }] : [],
+                        {
+                            value: 'back',
+                            label: 'Back',
+                            emoji: '↩️',
+                        },
+                    ]
+                },
                 success: (feature, sanction) => `Vous avez changé la fonctionnalité \`${feature}\` pour **${sanction}**.`
             },
             enable: {
@@ -1067,7 +1128,7 @@ module.exports = {
                 success: (user, amount, type) => `Vous avez **${type}** \`${amount}\` invite(s) à ${user}`
             },
             reset: (user) => `Vous avez reset les invites de ${user || 'tous le serveur'}`,
-            show: (user, invite) => {
+            show: (user, invite, total) => {
                 return {
                     author: {
                         name: `${user.username}#${user.discriminator}`,
@@ -1080,7 +1141,7 @@ module.exports = {
                         > Leave : **${invite.leave?.toString() || '0'}** invite(s)
                         > Fake : **${invite.fake?.toString() || '0'}** invite(s)
                         > Bonus : **${invite.bonus?.toString() || '0'}** invite(s)\n
-                        \`→\` Total : **${invite.total?.toString() || '0'}** invite(s)
+                        \`→\` Total : **${total?.toString() || '0'}** invite(s)
                     `,
                     footer: {
                         text: `${user.username}#${user.discriminator}`,
@@ -1093,8 +1154,30 @@ module.exports = {
             oauth: (member) => `${member} a été invité en utilisant l'oauth`
         },
         logs: {
+            baseMenu : [
+                {
+                    value: 'message',
+                    label: 'Message',
+                
+                },
+                {
+                    value: 'moderation',
+                    label: 'Moderation',
+                
+                },
+                {
+                    value: 'antiraid',
+                    label: 'Antiraid',
+                },
+                {
+                    value: 'voice',
+                    label: 'Vocal',
+                },
+              
+            ],
+            question : 'Quel est le salon ?',
             notText: `Le channel doit être est un channel textuel`,
-            success: (logs, channel) => `Vous avez définie les logs **${logs}** sur ${channel}`,
+            // success: (logs, channel) => `Vous avez définie les logs **${logs}** sur ${channel}`,
             template: {
                 message: {
                     link: (executor, channel, link) => {

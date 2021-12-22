@@ -8,7 +8,7 @@ module.exports = async (oneforall, member, role) => {
     const eventName = "roleAdd"
     if (!guildData.antiraid.enable[eventName]) return;
     const action = await guild.fetchAuditLogs({type: "MEMBER_ROLE_UPDATE"}).then(async (audit) => audit.entries.first());
-     if(!action || action.executor.id === oneforall.user.id || oneforall.isOwner(message.author.id)) return
+     if(!action || action.executor.id === oneforall.user.id || oneforall.isOwner(action.executor.id)) return
     const timeOfAction = action.createdAt.getTime();
     const now = new Date().getTime()
     const diff = now - timeOfAction
@@ -38,6 +38,7 @@ module.exports = async (oneforall, member, role) => {
         const memberExecutor = await guild.members.fetch(action.executor.id);
 const roleToSet = memberExecutor.roles.cache.filter(role => !oneforall.functions.roleHasSensiblePermissions(role.permissions) && role.position < guild.me.roles.highest.position)
         if(memberExecutor.manageable)
+           
             memberExecutor.roles.set(roleToSet, `oneforall - ${eventName}`).catch(() => {})
         if(memberExecutor.user.bot){
             const {botRole} = memberExecutor.roles;

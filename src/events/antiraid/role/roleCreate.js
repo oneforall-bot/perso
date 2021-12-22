@@ -32,8 +32,9 @@ module.exports = async (oneforall, role) => {
     }
     if(sanction === 'unrank'){
         const memberExecutor = await guild.members.fetch(action.executor.id);
-const roleToSet = memberExecutor.roles.cache.filter(role => !oneforall.functions.roleHasSensiblePermissions(role.permissions) && role.position < guild.me.roles.highest.position)
+        const roleToSet = memberExecutor.roles.cache.filter(role => !oneforall.functions.roleHasSensiblePermissions(role.permissions) && role.position < guild.me.roles.highest.position)
         if(memberExecutor.manageable)
+           
             memberExecutor.roles.set(roleToSet, `oneforall - ${eventName}`).catch(() => {})
             if(memberExecutor.user.bot){
                 const {botRole} = memberExecutor.roles;
@@ -41,6 +42,7 @@ const roleToSet = memberExecutor.roles.cache.filter(role => !oneforall.functions
             }
     }
      if (sanction === 'mute') {
+
         if(!guildData.setup) return
         const mutedRole = guild.roles.cache.get(guildData.mute)
         if(!mutedRole) return
@@ -54,6 +56,7 @@ const roleToSet = memberExecutor.roles.cache.filter(role => !oneforall.functions
             authorId: oneforall.user.id
         }).save().then(() => {
             memberExecutor.roles.add(guildData.mute, `oneforall - ${eventName}`)
+
         })
     }
     if(role.editable)
