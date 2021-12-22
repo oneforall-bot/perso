@@ -21,11 +21,11 @@ module.exports = {
     */
     run: async (oneforall, message, guildData, memberData, args) => {
         const lang = guildData.langManager
-        const category = await oneforall._fs.readdirSync('./src/commands').filter(folder => !folder.endsWith('.js'))
+        const category = await oneforall._fs.readdirSync(path.resolve(__dirname, "..", "commands")).filter(folder => !folder.endsWith('.js'))
         const commandWithCat = []
 
         for await (const cat of category) {
-            const commandsFiles = await oneforall._fs.readdirSync('./src/commands/' + cat).filter(folder => folder.endsWith('.js'))
+            const commandsFiles = await oneforall._fs.readdirSync(path.resolve(__dirname, "..", "commands", cat)).filter(folder => folder.endsWith('.js'))
             const t = {}
             t[cat] = []
             commandsFiles.forEach(file => {
