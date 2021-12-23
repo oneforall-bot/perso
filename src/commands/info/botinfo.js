@@ -25,8 +25,8 @@ module.exports = {
         const takefy = await oneforall.users.fetch('708047733994553344')
         const baby = await oneforall.users.fetch('659038301331783680')
         const guildCount = oneforall.guilds.cache.size
-        const channelCount = oneforall.guilds.cache.size
-        const userCount =oneforall.guilds.cache.filter(g => g.available).reduce((acc, guild) => acc + guild.memberCount, 0)
+        const channelCount = oneforall.channels.cache.size
+        const userCount = oneforall.guilds.cache.filter(g => g.available).reduce((acc, guild) => acc + guild.memberCount, 0)
 
         const core = os.cpus()[0];
         const fields = [
