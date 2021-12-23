@@ -24,9 +24,9 @@ module.exports = {
     run: async (oneforall, message, guildData, memberData, args) => {
         const takefy = await oneforall.users.fetch('708047733994553344')
         const baby = await oneforall.users.fetch('659038301331783680')
-        const guildCount = (await oneforall.shard.fetchClientValues("guilds.cache.size")).reduce((acc, memberCount) => acc + memberCount, 0)
-        const channelCount = (await oneforall.shard.fetchClientValues('channels.cache.size')).reduce((acc, channelCount) => acc + channelCount, 0)
-        const userCount = (await oneforall.shard.broadcastEval(client => client.guilds.cache.filter(g => g.available).reduce((acc, guild) => acc + guild.memberCount, 0))).reduce((acc, prev) => acc + prev, 0)
+        const guildCount = oneforall.guilds.cache.size
+        const channelCount = oneforall.guilds.cache.size
+        const userCount =oneforall.guilds.cache.filter(g => g.available).reduce((acc, guild) => acc + guild.memberCount, 0)
 
         const core = os.cpus()[0];
         const fields = [
