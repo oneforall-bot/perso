@@ -8,11 +8,11 @@ module.exports = {
     clientPermissions: ['SEND_MESSAGES', Permissions.FLAGS.EMBED_LINKS],
     cooldown: 1000,
     /**
-    * 
+    *
     * @param {OneForAll} oneforall
-    * @param {Message} message 
-    * @param {Collection} memberData 
-    * @param {Collection} guildData 
+    * @param {Message} message
+    * @param {Collection} memberData
+    * @param {Collection} guildData
     * @param {[]} args
     */
     run: async (oneforall, message, guildData, memberData, args) => {
@@ -107,7 +107,7 @@ module.exports = {
                 }
                 if (selectedOption === 'enable') {
                     invites.enable = !invites.enable
-                    row.components[0].options = lang.invite.config.selectMenuOptions(invites.enable)
+                    row.components[0].setOptions(lang.invite.config.selectMenuOptions(invites.enable))
                     await panel.edit({ components: [row] })
                     await updateEmbed()
                 }
@@ -153,7 +153,7 @@ module.exports = {
         if (subCommand === 'add' || subCommand === 'remove') {
             let amount = isNaN(args[2]) ? undefined : parseInt(args[2])
             if (!amount) return oneforall.functions.tempMessage(message, 'Invalid amount')
-            
+
             const member = args[1] ? (await message.guild.members.fetch(args[1]).catch(() => {})) || message.mentions.members.first() : undefined
             if(!member) return oneforall.functions.tempMessage(message, "Missing member")
             const targetData = oneforall.managers.membersManager.getAndCreateIfNotExists(`${message.guild.id}-${member.id}`, {
@@ -190,6 +190,6 @@ module.exports = {
             await oneforall.functions.tempMessage(message, lang.invite.reset(user) )
 
         }
-       
+
     }
 }
