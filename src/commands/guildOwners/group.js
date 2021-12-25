@@ -105,7 +105,7 @@ module.exports = {
                             emoji: '➡️'
                         }])
                     }
-                    function updateOptions(message, componentIndex) {
+                    function updateOptions(interaction, componentIndex) {
                         components[componentIndex].spliceOptions(0, components[componentIndex].options.length, componentIndex === 0 ? [...defaultDenyOptions.slice(slicerIndicatorMinDeny, slicerIndicatorMaxDeny), {
                             value: pageDeny < 1 ? 'next' : "prev",
                             description: 'See more permissions',
@@ -134,6 +134,7 @@ module.exports = {
                         time: 60 * 1000
                     })
                     collector.on('collect', async interaction => {
+                        await interaction.deferUpdate()
                         if (interaction.values[0] === 'next') {
                             interaction.customId === `group.edit.remove.${interaction.id}` ? pageAllow = pageAllow !== totalPageAllow - 1 ? pageAllow + 1 : pageAllow = 0 : pageDeny = pageDeny !== totalPageDeny - 1 ? pageDeny + 1 : pageDeny = 0
                             interaction.customId === `group.edit.remove.${interaction.id}` ? slicerIndicatorMinAllow += maxValues : slicerIndicatorMinDeny += maxValues
@@ -155,7 +156,6 @@ module.exports = {
                             default:
                                 roleData.permissions.push(...interaction.values);
                         }
-                        await interaction.deferUpdate()
                         collector.stop()
                         changePermissions(message, defaultMessage, memberData, roleData).then(resolve).catch((e) => {
                             console.log(e);
