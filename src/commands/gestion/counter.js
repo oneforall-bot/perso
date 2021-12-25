@@ -78,12 +78,12 @@ module.exports = {
         if (Object.keys(tempCouter).includes(selectedOption)) {
             components[0].setOptions(lang.counter.configMenu)
             selectedMenu = selectedOption
-            return await interaction.editReply({components: components.map(c => new MessageActionRow({components: [c]}))})
+            return await panel.edit({components: components.map(c => new MessageActionRow({components: [c]}))})
         }
         switch (selectedOption) {
             case 'back':
                 components[0].setOptions(lang.counter.selectMenu)
-                await interaction.editReply({components: components.map(c => new MessageActionRow({components: [c]}))})
+                await panel.edit({components: components.map(c => new MessageActionRow({components: [c]}))})
                 break;
             default:
                 const questionAnswer = await generateQuestion(lang.counter.configMenu.find(sl => sl.value === selectedOption)?.question)
