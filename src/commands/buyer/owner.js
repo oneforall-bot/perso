@@ -17,6 +17,7 @@ module.exports = {
     * @param {[]} args
     */
     run: async (oneforall, message, guildData, memberData, args) => {
+        if(message.author.id !== oneforall.config.buyer) return
         const subCommand = args[0]
         const lang = guildData.langManager
         const user = args[1] ? (await oneforall.users.fetch(args[1]).catch(() => { })) || message.mentions.users.first() : undefined
@@ -24,7 +25,7 @@ module.exports = {
             const isOwner = oneforall.config.owners.includes(user.id)
             if (isOwner) return oneforall.functions.tempMessage(message, lang.owners.add.alreadyOwner)
             oneforall.config.owners.push(user.id)
-            ftSecurity._fetch(`http://localhost:5006/api/client/${ftSecurity.config.client}/${ftSecurity.user.id}`, {
+            oneforall._fetch(`http://localhost:5006/api/client/${oneforall.config.client}/${oneforall.user.id}`, {
                 method: 'patch',
                 body: JSON.stringify({ owners: oneforall.config.owners }),
                 headers: {
@@ -40,7 +41,7 @@ module.exports = {
             const isOwner = oneforall.config.owners.includes(user.id)
             if (!isOwner) return oneforall.functions.tempMessage(message, lang.owners.remove.notOwner)
             oneforall.config.owners = oneforall.config.owners.filter(id => id !== user.id)
-            ftSecurity._fetch(`http://localhost:5006/api/client/${ftSecurity.config.client}/${ftSecurity.user.id}`, {
+            oneforall._fetch(`http://localhost:5006/api/client/${oneforall.config.client}/${oneforall.user.id}`, {
                 method: 'patch',
                 body: JSON.stringify({ owners: oneforall.config.owners }),
                 headers: {
