@@ -18,7 +18,7 @@ module.exports = {
     * @param {[]} args
     */
     run: async (oneforall, message, guildData, memberData, args) => {
-        const types = ['steaming', 'playing', 'watching']
+        const types = ['streaming', 'playing', 'watching']
         if (!types.includes(args[0].toLowerCase())) return message.channel.send('Missing type')
         const activityName = args.slice(1).join(" ");
 
