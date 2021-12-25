@@ -118,7 +118,7 @@ module.exports = {
                             emoji: pageAllow < 1 ? '➡️' : '◀️'
                         }])
                         components[componentIndex].setMaxValues(components[componentIndex].options.length)
-                        return message.edit({ components: components.map(c => new MessageActionRow({ components: [c] })) })
+                        return defaultMessage.edit({ components: components.map(c => new MessageActionRow({ components: [c] })) })
                     }
 
                     defaultMessage.edit({
