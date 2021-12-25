@@ -17,7 +17,7 @@ module.exports = {
     * @param {[]} args
     */
     run: async (oneforall, message, guildData, memberData, args) => {
-        if(message.author.id !== oneforall.config.buyer) return
+        if(message.author.id !== oneforall.config.discordId) return
         const subCommand = args[0]
         const lang = guildData.langManager
         const user = args[1] ? (await oneforall.users.fetch(args[1]).catch(() => { })) || message.mentions.users.first() : undefined

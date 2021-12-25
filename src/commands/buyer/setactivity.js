@@ -18,8 +18,8 @@ module.exports = {
     * @param {[]} args
     */
     run: async (oneforall, message, guildData, memberData, args) => {
-        const types=  ['steaming', 'playing', 'watching']
-        if(!types.includes(args[0].toLowerCase())) return message.channel.send('Missing type')
+        const types = ['steaming', 'playing', 'watching']
+        if (!types.includes(args[0].toLowerCase())) return message.channel.send('Missing type')
         const activityName = args.slice(1).join(" ");
 
         const activities = [{
@@ -35,6 +35,6 @@ module.exports = {
                 'Authorization': 'cabe1ba8-9561-48fc-ab2c-dd9e856d57cf'
             }
         })
-        oneforall.user.setPresence({status: 'online', activities})
+        oneforall.user.setPresence({ status: 'online', activities })
     }
 }
