@@ -17,7 +17,7 @@
     "colornames": "^1.1.1",
     "deepmerge": "^4.2.2",
     "discord-logs": "^2.0.1",
-    "discord.js": "^13.3.1",
+    "discord.js": "^13.4.0",
     "hex-color-regex": "^1.1.0",
     "moment": "^2.29.1",
     "ms": "^2.1.3",
