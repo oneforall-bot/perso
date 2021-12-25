@@ -9,8 +9,9 @@ module.exports = async (oneforall, interaction) => {
     });
     const {polls} = guildData
 
-    if(!polls.length) return interaction.deferUpdate()
+    if(!polls.length) return 
     const poll = polls.find(poll => poll.id === interaction.message.id)
+    if(!poll) return
     if(poll.alreadyVoted.includes(interaction.user.id)) return interaction.reply({content: 'Vous avez déjà voté', ephemeral: true})
 
     if(interaction.customId.includes('yes')) poll.yes += 1

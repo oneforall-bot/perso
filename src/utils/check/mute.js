@@ -17,7 +17,6 @@ module.exports = async (oneforall) => {
             })
             mutedExpired.delete()
             console.log('Removed mute for', mutedExpired.memberId)
-            await member.roles.remove(guildData.mute, `Auto unmute`)
         }
     }, 1500)
 }
