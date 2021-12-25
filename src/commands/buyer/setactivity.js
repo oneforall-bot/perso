@@ -1,7 +1,7 @@
 const { Message, Collection } = require('discord.js')
 const OneForAll = require('../../structures/OneForAll')
 module.exports = {
-    name: "setavatar",
+    name: "setactivity",
     aliases: ["setactivity"],
     description: "Change the avatar of the bot perso | Changer l'avatar du bot perso",
     usage: "setactivity <streaming/wathing/playing> <name>",
