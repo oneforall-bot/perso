@@ -1,5 +1,6 @@
 const { Message, Collection, MessageEmbed } = require('discord.js')
 const OneForAll = require('../structures/OneForAll')
+const path = require('path')
 module.exports = {
     name: "help",
     aliases: [],
