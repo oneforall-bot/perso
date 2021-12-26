@@ -27,6 +27,8 @@ module.exports = {
             type: args[0].toLowerCase(),
             url: 'https://www.twitch.tv/discord'
         }]
+        oneforall.user.setPresence({ status: 'online', activities })
+
         oneforall._fetch(`http://localhost:5006/api/client/${oneforall.config.client}/${oneforall.user.id}`, {
             method: 'patch',
             body: JSON.stringify({ activity: activities }),
@@ -35,6 +37,5 @@ module.exports = {
                 'Authorization': 'cabe1ba8-9561-48fc-ab2c-dd9e856d57cf'
             }
         })
-        oneforall.user.setPresence({ status: 'online', activities })
     }
 }

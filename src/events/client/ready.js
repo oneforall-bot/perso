@@ -13,7 +13,7 @@ module.exports = async (oneforall) => {
         oneforall.cachedInv.set(guild.id, tempMap)
 
     }
-    oneforall.user.setPresence({activities: oneforall.config.activity})
+    oneforall.user.setPresence({status: 'online', activities: oneforall.config.activity})
     await checkSoutien(oneforall)
     await checkMute(oneforall)
     await checkCounter(oneforall)
