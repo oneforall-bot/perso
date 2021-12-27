@@ -14,11 +14,11 @@ module.exports = {
     ownersOnly: false,
     cooldown: 0,
     /**
-    * 
+    *
     * @param {OneForAll} oneforall
-    * @param {Message} message 
-    * @param {Collection} memberData 
-    * @param {Collection} guildData 
+    * @param {Message} message
+    * @param {Collection} memberData
+    * @param {Collection} guildData
     * @param {[]} args
     */
     run: async (oneforall, message, guildData, memberData, args) => {
@@ -112,6 +112,7 @@ module.exports = {
             const collector = message.channel.createMessageComponentCollector(componentFilter)
             collector.on('collect', async (interaction) => {
                 await interaction.deferUpdate()
+
                 if (interaction.componentType === 'BUTTON') {
                     const selectedButton = interaction.customId.split('.')[1]
                     if (selectedButton === 'left') {
@@ -138,12 +139,12 @@ module.exports = {
 
                 } else {
                     const selectOption = interaction.values[0];
-                    if (selectOption in config) 
+                    if (selectOption in config)
                         selectFeature = selectOption
                     const isLimit = (selectFeature || selectOption )in limit
                     const component = components()
-                    component[2].options = lang.antiraid.config.configMenu(enable[selectOption], isLimit)
-                 
+                    component[2].setOptions(lang.antiraid.config.configMenu(enable[selectOption], isLimit))
+
                     if(selectFeature) {
                         if (selectOption === 'enable') {
                             enable[selectFeature] = !enable[selectFeature]
