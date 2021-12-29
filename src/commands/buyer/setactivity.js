@@ -3,7 +3,7 @@ const OneForAll = require('../../structures/OneForAll')
 module.exports = {
     name: "setactivity",
     aliases: ["setactivity"],
-    description: "Change the avatar of the bot perso | Changer l'avatar du bot perso",
+    description: "Change the activity of the bot perso | Changer l'activité du bot perso",
     usage: "setactivity <streaming/wathing/playing> <name>",
     clientPermissions: ['SEND_MESSAGES'],
     ofaPerms: [],
@@ -24,7 +24,7 @@ module.exports = {
 
         const activities = [{
             name: activityName,
-            type: args[0].toLowerCase(),
+            type: args[0].toUpperCase(),
             url: 'https://www.twitch.tv/discord'
         }]
         oneforall.user.setPresence({ status: 'online', activities })
